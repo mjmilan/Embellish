@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+# SharpDevelop 5.0
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Embellish", "Embellish\Embellish.csproj", "{17ACCE14-64FC-407E-BD61-FC2273391207}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Embellish.Tests", "Embellish.Tests\Embellish.Tests.csproj", "{8DFB7D4B-1F2B-4D39-AB00-BBA4DA2B3DF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17ACCE14-64FC-407E-BD61-FC2273391207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17ACCE14-64FC-407E-BD61-FC2273391207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17ACCE14-64FC-407E-BD61-FC2273391207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17ACCE14-64FC-407E-BD61-FC2273391207}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DFB7D4B-1F2B-4D39-AB00-BBA4DA2B3DF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DFB7D4B-1F2B-4D39-AB00-BBA4DA2B3DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DFB7D4B-1F2B-4D39-AB00-BBA4DA2B3DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DFB7D4B-1F2B-4D39-AB00-BBA4DA2B3DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
