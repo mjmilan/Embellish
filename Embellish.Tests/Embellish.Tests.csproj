@@ -50,6 +50,7 @@
     <Compile Include="ExtensionPropertyTests.cs" />
     <Compile Include="IntergerExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeGuitarTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

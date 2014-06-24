@@ -50,10 +50,16 @@
     <Compile Include="ExtensionProperties\PropertyManager.cs" />
     <Compile Include="IntegerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RangeGuitar\GuitarString.cs" />
+    <Compile Include="RangeGuitar\Range.cs" />
+    <Compile Include="RangeGuitar\RangeBand.cs" />
+    <Compile Include="RangeGuitar\RangeGuitar.cs" />
+    <Compile Include="RangeGuitar\StringItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ExtensionProperties" />
     <Folder Include="ExtensionProperties\Exceptions" />
+    <Folder Include="RangeGuitar" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
