@@ -44,8 +44,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionProperties\Exceptions\ExtensionPropertyNotSupported.cs" />
+    <Compile Include="ExtensionProperties\ExtensionMethods.cs" />
+    <Compile Include="ExtensionProperties\ExtensionPropertiesAttribute.cs" />
+    <Compile Include="ExtensionProperties\PropertyManager.cs" />
     <Compile Include="IntegerExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ExtensionProperties" />
+    <Folder Include="ExtensionProperties\Exceptions" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
