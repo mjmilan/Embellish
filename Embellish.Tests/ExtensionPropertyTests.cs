@@ -30,7 +30,7 @@ namespace Embellish.Tests
 			
 			Assert.That(a.GetExtensionProperty("name"), Is.EqualTo("five"));
 			Assert.That(b.GetExtensionProperty("name"), Is.EqualTo("three"));
-			
+			Assert.That(b.GetGenericExtensionProperty<string>("name"), Is.EqualTo("three"));
 		}
 	}
 }

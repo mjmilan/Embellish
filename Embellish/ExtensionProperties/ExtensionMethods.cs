@@ -40,5 +40,20 @@ namespace Embellish.ExtensionProperties
 			var pm = new PropertyManager(host);
 			pm.RemovePropertyValue(propertyName, suppressDispose);
 		}
+		
+		#region Generic methods
+		public static T GetGenericExtensionProperty<T>(this object host, string propertyName)
+		{
+			T result = (T)(this.GetExtensionProperty(host, propertyName));
+			return result;
+		}
+		
+		public static void SetGenericExtensionProperty<T>(this object host, string propertyName, T value, bool suppressDispose = true)
+		{
+			host.SetExtensionProperty(propertyName, value,suppressDispose);
+			
+		}
+		
+		#endregion
 	}
 }
