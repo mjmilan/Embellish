@@ -44,7 +44,7 @@ namespace Embellish.ExtensionProperties
 		#region Generic methods
 		public static T GetGenericExtensionProperty<T>(this object host, string propertyName)
 		{
-			T result = (T)(host.GetExtensionProperty(host, propertyName));
+			T result = (T)(host.GetExtensionProperty(propertyName));
 			return result;
 		}
 		
