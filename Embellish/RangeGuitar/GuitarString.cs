@@ -73,11 +73,25 @@ namespace Embellish.RangeGuitar
 						
 						case IntersectionDetails.AInB:
 							// We need to split B (loopitem) into two seperate pieces.
+							// TODO : Resolve unit test.
+							
+							// Item will be used to store the item we are adding.
+							// newItem will be used to store the overspill on the high side.
+							// loopItem will be used to store the overspill on the low side.
+							
+							// If a record has the same start point and end point, then it is invalid and should not be added/ should be removed.
+							
+							
 							T origEndOfB = loopItem.EndPoint;
 							loopItem.EndPoint = item.StartPoint;
-							
-							StringItem<T> newItem = this.createItem(item.EndPoint, origEndOfB, loopItem.Content);
-							mlstItems.Add(newItem.StartPoint, newItem);
+							if (loopItem.StartPoint.CompareTo(loopItem.EndPoint) == 0)
+							{
+								mlstItems.Remove(loopItem.StartPoint);
+							}
+							if (item.EndPoint.CompareTo(origEndOfB) != 0)
+							{
+								StringItem<T> newItem = this.createItem(item.EndPoint, origEndOfB, loopItem.Content);
+							}
 							break;
 							
 						case IntersectionDetails.IntersectionALowerThanB:
@@ -111,8 +125,13 @@ namespace Embellish.RangeGuitar
 				}
 				i++;
 			}
+			
+			foreach (var toBeRemoved in mlstItems.Where(x => x.Value.StartPoint.CompareTo(x.Value.EndPoint) == 0).ToArray())
+			{
+				mlstItems.Remove(toBeRemoved.Key);
+			}
 			mlstItems.Add(item.StartPoint, item);
-					
+			
 			
 		}
 		
