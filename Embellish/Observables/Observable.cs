@@ -3,9 +3,7 @@ using System;
 
 namespace Embellish.Observables
 {
-	/// <summary>
-	/// Description of Observable.
-	/// </summary>
+
 	[System.ComponentModel.DefaultProperty("Item")]
 	public class Observable<T> : IObservable<T>
 	{

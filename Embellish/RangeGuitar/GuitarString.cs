@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 namespace Embellish.RangeGuitar
 {
-	/// <summary>
-	/// Representation of 
-	/// </summary>
+
 	public class GuitarString<T> where T : IComparable
 	{
 		#region Members

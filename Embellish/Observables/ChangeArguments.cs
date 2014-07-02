@@ -3,9 +3,7 @@ using System;
 
 namespace Embellish.Observables
 {
-	/// <summary>
-	/// Description of ChangeArguments.
-	/// </summary>
+
 	public class ChangeArguments<T>
 	{
 		public ChangeArguments(T oldValue, T newValue)
