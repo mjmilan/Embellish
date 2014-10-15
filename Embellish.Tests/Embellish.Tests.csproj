@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="ExtensionPropertyTests.cs" />
     <Compile Include="IntergerExtensionsTests.cs" />
+    <Compile Include="LinqEmbellishmentsTests.cs" />
     <Compile Include="ObservablesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeGuitarTests.cs" />

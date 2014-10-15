@@ -49,6 +49,7 @@
     <Compile Include="ExtensionProperties\ExtensionPropertiesAttribute.cs" />
     <Compile Include="ExtensionProperties\PropertyManager.cs" />
     <Compile Include="IntegerExtensions.cs" />
+    <Compile Include="LinqExtensions\LinqEmbellishments.cs" />
     <Compile Include="Observables\ChangeArguments.cs" />
     <Compile Include="Observables\IObservable.cs" />
     <Compile Include="Observables\Observable.cs" />
@@ -59,11 +60,6 @@
     <Compile Include="RangeGuitar\RangeGuitar.cs" />
     <Compile Include="RangeGuitar\StringItem.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ExtensionProperties" />
-    <Folder Include="ExtensionProperties\Exceptions" />
-    <Folder Include="Observables" />
-    <Folder Include="RangeGuitar" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
