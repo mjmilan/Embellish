@@ -61,6 +61,7 @@
     <Compile Include="RangeGuitar\RangeBand.cs" />
     <Compile Include="RangeGuitar\RangeGuitar.cs" />
     <Compile Include="RangeGuitar\StringItem.cs" />
+    <Compile Include="StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
