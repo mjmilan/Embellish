@@ -54,6 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeGuitarTests.cs" />
     <Compile Include="StringExtensionTests.cs" />
+    <Compile Include="XmlSubstitutionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
