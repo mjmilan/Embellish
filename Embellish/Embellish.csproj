@@ -63,6 +63,7 @@
     <Compile Include="RangeGuitar\RangeGuitar.cs" />
     <Compile Include="RangeGuitar\StringItem.cs" />
     <Compile Include="StringExtensions.cs" />
+    <Compile Include="XMLSubstitution\XMLElementSubstitution.cs" />
     <Compile Include="XMLSubstitution\XMLSubstitution.cs" />
   </ItemGroup>
   <ItemGroup>
