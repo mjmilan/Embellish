@@ -47,6 +47,8 @@
   <ItemGroup>
     <Compile Include="BaseClasses\XMLSubstitiutionBase.cs" />
     <Compile Include="Colour\HSLColour.cs" />
+    <Compile Include="Dependencies\DependencyDomain.cs" />
+    <Compile Include="Dependencies\DependencyObject.cs" />
     <Compile Include="ExtensionProperties\Exceptions\ExtensionPropertyNotSupported.cs" />
     <Compile Include="ExtensionProperties\ExtensionMethods.cs" />
     <Compile Include="ExtensionProperties\ExtensionPropertiesAttribute.cs" />
@@ -68,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="BaseClasses" />
+    <Folder Include="Dependencies" />
     <Folder Include="XMLSubstitution" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependenciesTests.cs" />
     <Compile Include="ExtensionPropertyTests.cs" />
     <Compile Include="IntergerExtensionsTests.cs" />
     <Compile Include="LinqEmbellishmentsTests.cs" />
