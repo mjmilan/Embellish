@@ -12,8 +12,8 @@ namespace Embellish.Dependencies
 	{
 		#region Properties
 		protected WeakReference<DependencyDomain<T>> _domain = null;
-		internal  List<WeakReference<DependencyObject<T>>> MyDependencies = new List<WeakReference<DependencyObject<T>>>();
-		internal  List<WeakReference<DependencyObject<T>>> MyConsumers = new List<WeakReference<DependencyObject<T>>>();
+		internal  List<DependencyObject<T>> MyDependencies = new List<DependencyObject<T>>();
+		internal  List<DependencyObject<T>> MyConsumers = new List<DependencyObject<T>>();
 		internal T UnderlyingObject {get; set;}
 		public T ReferencedObject{
 			get
@@ -24,15 +24,7 @@ namespace Embellish.Dependencies
 		public List<T> ItemsIDirectlyDependUpon{
 			get
 			{
-				return MyDependencies.Select(x => {
-				                             	DependencyObject<T> depObj;
-				                             	if (x.TryGetTarget(out depObj))
-			                             	    {
-			                             	    	return depObj.UnderlyingObject;
-			                             	    }
-				                             	return null;
-				                             }
-				     ).ToList();
+				return MyDependencies.Select(x => x.UnderlyingObject).ToList();
 			}
 		}
 		#endregion
@@ -48,32 +40,15 @@ namespace Embellish.Dependencies
 		#region Methods
 		internal void AddDependency (T dependency){
 			// Only act if we don't already have a record of the dependency
-			if (!MyConsumers.Any(x => {
-			                     	bool result = false;
-			                     	DependencyObject<T> dep;
-			                     	if (x.TryGetTarget(out dep))
-			                     	{
-			                     		result = dep.UnderlyingObject as T == dependency;
-			                     	}
-			                     	return result;
-			                     }))
+			if (!MyConsumers.Any(x => x.UnderlyingObject == dependency))
 			{
 				var newDependencyObject = new DependencyObject<T>(_domain, dependency);
-				MyDependencies.Add(new WeakReference<DependencyObject<T>>(newDependencyObject));
+				MyDependencies.Add(newDependencyObject);
 			}
 		}
 		internal void RemoveDependencies (T dependencyToRemove)
 		{
-			var toRemove = MyDependencies.RemoveAll(x => 
-			                                        {
-			                                        	bool result = false;
-			                                        	DependencyObject<T> d;
-			                                        	if (x.TryGetTarget(out d))
-			                                        	{
-			                                        		result = d.UnderlyingObject == dependencyToRemove;
-			                                        	}
-			                                        	return result;
-			                                        });
+			var toRemove = MyDependencies.RemoveAll(x => x.UnderlyingObject == dependencyToRemove);
 		}
 		
 		internal void RemoveReferencesFromOtherDependencies()
@@ -101,19 +76,19 @@ namespace Embellish.Dependencies
 		}
 		protected void RecursiveDependencyInfo (List<Tuple<int, DependencyObject<T>>> recursionList, int iteration, DependencyObject<T> target, List<DependencyObject<T>> alreadyTested)
 		{
-			foreach(var wr in target.MyDependencies)
+			DependencyDomain<T> ourDomain;
+			_domain.TryGetTarget(out ourDomain);
+			
+			foreach(var d in target.MyDependencies)
 			{
-				DependencyObject<T> depObj;
-				if (wr.TryGetTarget(out depObj))
-				{
-					if (!alreadyTested.Contains(depObj))
-				    {
-						var tuple = new Tuple<int, DependencyObject<T>>(iteration, depObj);
-						recursionList.Add(tuple);
-						alreadyTested.Add(depObj);
-						RecursiveDependencyInfo(recursionList, iteration+1, depObj,alreadyTested);
-				    }
-				}
+				var depObj = ourDomain._items[d.UnderlyingObject];
+				if (!alreadyTested.Contains(depObj))
+			    {
+					var tuple = new Tuple<int, DependencyObject<T>>(iteration, depObj);
+					recursionList.Add(tuple);
+					alreadyTested.Add(depObj);
+					RecursiveDependencyInfo(recursionList, iteration+1, depObj,alreadyTested);
+			    }
 			}
 			
 		}

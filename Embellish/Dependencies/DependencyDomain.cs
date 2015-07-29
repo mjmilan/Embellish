@@ -9,7 +9,7 @@ namespace Embellish.Dependencies
 	public class DependencyDomain<T> where T:class
 	{
 		#region Members
-		private Dictionary<T, DependencyObject<T>> _items = new Dictionary<T, DependencyObject<T>>();
+		public Dictionary<T, DependencyObject<T>> _items = new Dictionary<T, DependencyObject<T>>();
 		#endregion
 		#region Properties
 		internal  Dictionary<T, DependencyObject<T>> Items{
