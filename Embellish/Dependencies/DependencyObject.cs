@@ -98,6 +98,15 @@ namespace Embellish.Dependencies
 			var info = RecursiveObjectsIDependOnFullInfo().Select(x => x.Item2.UnderlyingObject).ToList();
 			return info;
 		}
+		
+		internal void RemoveDependency(T dependency)
+		{
+			this.MyDependencies.RemoveAll(x => x.UnderlyingObject == dependency);
+		}
+		
+		internal bool DependsUpon(T testObject){
+			return RecursiveObjectsIDependOnFullInfo().Any(x => x.Item2.UnderlyingObject == testObject);
+		}
 		#endregion
 		
 	}

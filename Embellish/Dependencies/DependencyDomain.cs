@@ -105,6 +105,24 @@ namespace Embellish.Dependencies
 			
 		}
 		
+		public void RemoveDependency(T target, T dependency)
+		{
+			if (_items.ContainsKey(target))
+			{
+				_items[target].RemoveDependency(dependency);
+			}
+		}
+		
+		public bool DoesADependOnB(T a, T b)
+		{
+			if(!(_items.ContainsKey(a) && _items.ContainsKey(b)))
+			{
+				throw new ArgumentException ("You have supplied an object that is not within this DependencyDomain");
+			}
+			
+			return _items[a].DependsUpon(b);
+			
+		}
 		#endregion
 	}
 }

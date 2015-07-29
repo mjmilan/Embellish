@@ -79,6 +79,31 @@ namespace Embellish.Tests
 			Assert.That(deps, Contains.Item(stringC));
 			
 		}
+		
+		[Test]
+		public void GeneralDependencyChecks()
+		{
+			// Arrange
+			var domain = new DependencyDomain<string>();
+			var stringA = "A";
+			var stringB = "B";
+			var stringC = "C";
+			domain.AddToDomain(stringA);
+			domain.AddToDomain(stringB);
+			domain.AddToDomain(stringC);
+			domain.AddDependency(stringA, stringB); // stringA has a dependency on stringB
+			domain.AddDependency(stringB, stringC); // stringB has a dependency on stringC		
 			
+			// Act
+			
+			// Assert
+			
+			Assert.That(domain.DoesADependOnB(stringA,stringB), Is.True);
+			Assert.That(domain.DoesADependOnB(stringA, stringC), Is.True);
+			Assert.That(domain.DoesADependOnB(stringB, stringA), Is.False);
+			Assert.That(domain.DoesADependOnB(stringC, stringA), Is.False);
+			
+		}
+
 	}
 }
