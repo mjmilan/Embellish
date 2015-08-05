@@ -16,12 +16,7 @@ namespace Embellish.Dependencies
 		internal  ObservableCollection<DependencyObject<T>> MyDependencies = new ObservableCollection<DependencyObject<T>>();
 		internal  List<DependencyObject<T>> MyConsumers = new List<DependencyObject<T>>();
 		internal T UnderlyingObject {get; set;}
-		public T ReferencedObject{
-			get
-			{
-				return this.UnderlyingObject;
-			}
-		}
+
 		public List<T> ItemsIDirectlyDependUpon{
 			get
 			{
@@ -39,7 +34,12 @@ namespace Embellish.Dependencies
 			MyDependencies.CollectionChanged += this.DepencyChangeHandler;
 		}
 		#endregion
+		
 		#region Methods
+		/// <summary>
+		/// Record that the supplied object depends upon this one.
+		/// </summary>
+		/// <param name="dependency">Supplied object</param>
 		internal void AddDependency (T dependency){
 			// Only act if we don't already have a record of the dependency
 			if (!MyDependencies.Any(x => x.UnderlyingObject == dependency))
@@ -58,7 +58,9 @@ namespace Embellish.Dependencies
 			}
 		}
 		
-		
+		/// <summary>
+		/// Remove this object from the dependencies list on all other objects in the dependency domain.
+		/// </summary>
 		internal void RemoveReferencesFromOtherDependencies()
 		{
 			DependencyDomain<T> domain;
@@ -80,8 +82,8 @@ namespace Embellish.Dependencies
 			var alreadyTested = new List<DependencyObject<T>>();
 			RecursiveDependencyInfo(recursiveList, 0, this, alreadyTested);
 			return recursiveList.OrderBy(x => x.Item1).ToList();
-			
 		}
+		
 		protected void RecursiveDependencyInfo (List<Tuple<int, DependencyObject<T>>> recursionList, int iteration, DependencyObject<T> target, List<DependencyObject<T>> alreadyTested)
 		{
 			DependencyDomain<T> ourDomain;
@@ -101,12 +103,20 @@ namespace Embellish.Dependencies
 			
 		}
 		
+		/// <summary>
+		/// Gets a list of all objects that this object depends upon...
+		/// </summary>
+		/// <returns>Returns a list of all objects that this object depends upon</returns>
 		internal List<T> AllDependencies()
 		{
 			var info = RecursiveObjectsIDependOnFullInfo().Select(x => x.Item2.UnderlyingObject).ToList();
 			return info;
 		}
 		
+		/// <summary>
+		/// Remove the specified object from this object's list of dependencies.
+		/// </summary>
+		/// <param name="dependency"></param>
 		internal void RemoveDependency(T dependency)
 		{
 			var toBeRemoved = this.MyDependencies.Where(x => x.UnderlyingObject == dependency).ToList();
@@ -117,12 +127,22 @@ namespace Embellish.Dependencies
 			
 		}
 		
+		/// <summary>
+		/// Determines whether this object has any dependency (direct or indirect) on the supplied test object
+		/// </summary>
+		/// <param name="testObject"></param>
+		/// <returns>True of there is a dependency, otherwise false...=</returns>
 		internal bool DependsUpon(T testObject){
 			return RecursiveObjectsIDependOnFullInfo().Any(x => x.Item2.UnderlyingObject == testObject);
 		}
 		#endregion
 		
 		#region Event Handlers
+		/// <summary>
+		/// Event handler for detecting when where is a change to the dependent objects...
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="changeArguments"></param>
 		protected void DepencyChangeHandler(Object sender,	NotifyCollectionChangedEventArgs changeArguments)
 		{
 			if (changeArguments.Action == NotifyCollectionChangedAction.Add)
