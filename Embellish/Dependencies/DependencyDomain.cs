@@ -143,6 +143,13 @@ namespace Embellish.Dependencies
 			}
 		}
 		
+		public List<T> RootLevelObjects()
+		{
+			List<T> results;
+			results = _items.Values.Where(x => x.MyDependencies.Count == 0).Select(x => x.UnderlyingObject).ToList();
+			return results;
+		}
+		
 		#endregion
 	}
 }

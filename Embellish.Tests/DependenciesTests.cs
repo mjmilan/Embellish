@@ -145,12 +145,35 @@ namespace Embellish.Tests
 			
 			// Assert
 			
-			//Assert.That(domain.DirectConsumersOfTarget(stringC)[0] == stringB, Is.True);
+			Assert.That(domain.DirectConsumersOfTarget(stringC)[0] == stringB, Is.True);
 			Assert.That(domain.DirectConsumersOfTarget(stringC).Count, Is.EqualTo(1));
 			            
 		
 		}
-
+		
+		[Test]
+		public void RootLevelItemsTest()
+		{
+			// Arrange
+			var domain = new DependencyDomain<string>();
+			var stringA = "A";
+			var stringB = "B";
+			var stringC = "C";
+			domain.AddToDomain(stringA);
+			domain.AddToDomain(stringB);
+			domain.AddToDomain(stringC);
+			domain.AddDependency(stringA, stringB); // stringA has a dependency on stringB
+			domain.AddDependency(stringB, stringC); // stringB has a dependency on stringC		
+			
+			// Act
+			var results = domain.RootLevelObjects();
+			
+			// Assert
+			
+			Assert.That(results.Count, Is.EqualTo(1));
+			Assert.That(results[0], Is.EqualTo("C"));
+		
+		}
 		
 	}
 }
