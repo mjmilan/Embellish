@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 namespace Embellish.Dependencies
 {
 	/// <summary>
@@ -9,7 +10,7 @@ namespace Embellish.Dependencies
 	public class DependencyDomain<T> where T:class
 	{
 		#region Members
-		public Dictionary<T, DependencyObject<T>> _items = new Dictionary<T, DependencyObject<T>>();
+		internal Dictionary<T, DependencyObject<T>> _items = new Dictionary<T, DependencyObject<T>>();
 		#endregion
 		#region Properties
 		internal  Dictionary<T, DependencyObject<T>> Items{
@@ -121,8 +122,27 @@ namespace Embellish.Dependencies
 			}
 			
 			return _items[a].DependsUpon(b);
-			
 		}
+		
+		public bool IsAConsumedByB(T a, T b)
+		{
+			// Turning the question about ot it's head, we can reverse this and simply ask if B depends on A...
+			return DoesADependOnB(b,a);
+		}
+		
+		public List<T> DirectConsumersOfTarget(T target)
+		{
+			if (_items.ContainsKey(target))
+			{
+				var depObj = _items[target];
+				return depObj.MyConsumers.Select(x => x.UnderlyingObject).ToList();
+			}
+			else
+			{
+				throw new ArgumentException("The object you have passed in is not a member of this dependecy domain...");
+			}
+		}
+		
 		#endregion
 	}
 }

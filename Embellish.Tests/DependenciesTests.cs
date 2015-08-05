@@ -104,6 +104,53 @@ namespace Embellish.Tests
 			Assert.That(domain.DoesADependOnB(stringC, stringA), Is.False);
 			
 		}
+		
+		[Test]
+		public void GeneralConsumerChecks()
+		{
+			// Arrange
+			var domain = new DependencyDomain<string>();
+			var stringA = "A";
+			var stringB = "B";
+			var stringC = "C";
+			domain.AddToDomain(stringA);
+			domain.AddToDomain(stringB);
+			domain.AddToDomain(stringC);
+			domain.AddDependency(stringA, stringB); // stringA has a dependency on stringB
+			domain.AddDependency(stringB, stringC); // stringB has a dependency on stringC		
+			
+			// Act
+			
+			// Assert
+			
+			Assert.That(domain.IsAConsumedByB(stringC, stringA), Is.True);
+			
+		}
 
+		[Test]
+		public void DirectConsumersTest()
+		{
+			// Arrange
+			var domain = new DependencyDomain<string>();
+			var stringA = "A";
+			var stringB = "B";
+			var stringC = "C";
+			domain.AddToDomain(stringA);
+			domain.AddToDomain(stringB);
+			domain.AddToDomain(stringC);
+			domain.AddDependency(stringA, stringB); // stringA has a dependency on stringB
+			domain.AddDependency(stringB, stringC); // stringB has a dependency on stringC		
+			
+			// Act
+			
+			// Assert
+			
+			//Assert.That(domain.DirectConsumersOfTarget(stringC)[0] == stringB, Is.True);
+			Assert.That(domain.DirectConsumersOfTarget(stringC).Count, Is.EqualTo(1));
+			            
+		
+		}
+
+		
 	}
 }

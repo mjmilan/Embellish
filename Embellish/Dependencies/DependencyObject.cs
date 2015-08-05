@@ -2,17 +2,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 namespace Embellish.Dependencies
 {
 	/// <summary>
 	/// This is a representation of an object that is being tracked.
 	/// </summary>
-	public class DependencyObject<T> where T:class
+	internal class DependencyObject<T> where T:class
 	{
 		#region Properties
 		protected WeakReference<DependencyDomain<T>> _domain = null;
-		internal  List<DependencyObject<T>> MyDependencies = new List<DependencyObject<T>>();
+		internal  ObservableCollection<DependencyObject<T>> MyDependencies = new ObservableCollection<DependencyObject<T>>();
 		internal  List<DependencyObject<T>> MyConsumers = new List<DependencyObject<T>>();
 		internal T UnderlyingObject {get; set;}
 		public T ReferencedObject{
@@ -35,21 +36,28 @@ namespace Embellish.Dependencies
 			if (underlyingObject == null) throw new ArgumentException("The underlyingObject has not been populated");
 			_domain = domain;
 			UnderlyingObject = underlyingObject;
+			MyDependencies.CollectionChanged += this.DepencyChangeHandler;
 		}
 		#endregion
 		#region Methods
 		internal void AddDependency (T dependency){
 			// Only act if we don't already have a record of the dependency
-			if (!MyConsumers.Any(x => x.UnderlyingObject == dependency))
+			if (!MyDependencies.Any(x => x.UnderlyingObject == dependency))
 			{
-				var newDependencyObject = new DependencyObject<T>(_domain, dependency);
+				DependencyDomain<T> domain;
+				DependencyObject<T> newDependencyObject;
+				if (_domain.TryGetTarget(out domain))
+				{
+					newDependencyObject = domain.Items[dependency];
+				}
+				else
+				{
+					newDependencyObject = new DependencyObject<T>(_domain, dependency);
+				}
 				MyDependencies.Add(newDependencyObject);
 			}
 		}
-		internal void RemoveDependencies (T dependencyToRemove)
-		{
-			var toRemove = MyDependencies.RemoveAll(x => x.UnderlyingObject == dependencyToRemove);
-		}
+		
 		
 		internal void RemoveReferencesFromOtherDependencies()
 		{
@@ -59,7 +67,7 @@ namespace Embellish.Dependencies
 				var otherDependencyObjects = domain.Items.Values.Where(x => x != this);
 				foreach (var oDependency in otherDependencyObjects)
 				{
-					oDependency.RemoveDependencies(this.UnderlyingObject);
+					oDependency.RemoveDependency(this.UnderlyingObject);
 				}
 			}
 		}
@@ -101,7 +109,12 @@ namespace Embellish.Dependencies
 		
 		internal void RemoveDependency(T dependency)
 		{
-			this.MyDependencies.RemoveAll(x => x.UnderlyingObject == dependency);
+			var toBeRemoved = this.MyDependencies.Where(x => x.UnderlyingObject == dependency).ToList();
+			foreach (var d in toBeRemoved)
+			{
+				MyDependencies.Remove(d);
+			}
+			
 		}
 		
 		internal bool DependsUpon(T testObject){
@@ -109,5 +122,31 @@ namespace Embellish.Dependencies
 		}
 		#endregion
 		
+		#region Event Handlers
+		protected void DepencyChangeHandler(Object sender,	NotifyCollectionChangedEventArgs changeArguments)
+		{
+			if (changeArguments.Action == NotifyCollectionChangedAction.Add)
+			{
+				// We are adding dependencies
+				foreach (var d in changeArguments.NewItems)
+				{
+					DependencyObject<T> dep = (DependencyObject<T>)d;
+					dep.MyConsumers.Add(this);
+				}
+			}
+			else if(changeArguments.Action == NotifyCollectionChangedAction.Remove)
+			{
+				// We are removing dependencies
+				foreach (var d in changeArguments.OldItems)
+				{
+					DependencyObject<T> dep = (DependencyObject<T>)d;
+					if (dep.MyConsumers.Contains(this))
+					{
+						dep.MyConsumers.Remove(this);
+					}
+				}
+			}
+		}
+		#endregion
 	}
 }
