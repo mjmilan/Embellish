@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DependenciesTests.cs" />
+    <Compile Include="EventSubscriptionsTests.cs" />
     <Compile Include="ExtensionPropertyTests.cs" />
     <Compile Include="IntergerExtensionsTests.cs" />
     <Compile Include="LinqEmbellishmentsTests.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RangeGuitarTests.cs" />
     <Compile Include="StringExtensionTests.cs" />
+    <Compile Include="SupportingClasses\ClassWithEvent.cs" />
     <Compile Include="XmlSubstitutionTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +67,9 @@
       <Project>{17ACCE14-64FC-407E-BD61-FC2273391207}</Project>
       <Name>Embellish</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SupportingClasses" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

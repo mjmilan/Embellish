@@ -49,6 +49,9 @@
     <Compile Include="Colour\HSLColour.cs" />
     <Compile Include="Dependencies\DependencyDomain.cs" />
     <Compile Include="Dependencies\DependencyObject.cs" />
+    <Compile Include="EventSubscriptions\EventInformation.cs" />
+    <Compile Include="EventSubscriptions\EventSubscriptionsManager.cs" />
+    <Compile Include="EventSubscriptions\Subscription.cs" />
     <Compile Include="ExtensionProperties\Exceptions\ExtensionPropertyNotSupported.cs" />
     <Compile Include="ExtensionProperties\ExtensionMethods.cs" />
     <Compile Include="ExtensionProperties\ExtensionPropertiesAttribute.cs" />
@@ -71,6 +74,7 @@
   <ItemGroup>
     <Folder Include="BaseClasses" />
     <Folder Include="Dependencies" />
+    <Folder Include="EventSubscriptions" />
     <Folder Include="XMLSubstitution" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
