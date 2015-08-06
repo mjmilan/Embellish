@@ -44,6 +44,22 @@ namespace Embellish.Tests
 			Assert.That(subscribers.Count, Is.EqualTo(2));
 		}
 		
+		[Test]
+		[ExpectedException(typeof(ArgumentException))]
+		public void TestCallingForUnknownEventCausesException()
+		{
+			// Arrange
+			var objWithEvents = new SupportingClasses.ClassWithEvent();
+			objWithEvents.SomethingHappened += EventHandler1;
+			objWithEvents.SomethingHappened += EventHandler2;
+
+			// Act
+			var manager = new Embellish.EventSubscriptions.EventSubscriptionsManager(objWithEvents);
+			
+			var eventInformation = manager.GetEventInformationForNamedEvent("A Load Of Tosh");
+			
+		}
+		
 		private void EventHandler1(object sender, EventArgs e)
 		{
 			
