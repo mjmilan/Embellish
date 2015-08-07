@@ -10,14 +10,14 @@ namespace Embellish.EventSubscriptions
 	/// <summary>
 	/// Description of EventSubscriptionsManager.
 	/// </summary>
-	public class EventSubscriptionsManager
+	public class EventSubscriptionsViewer
 	{
 		#region Members
 		protected object _eventSource;
 		#endregion
 		
 		#region Constructor
-		public EventSubscriptionsManager(object eventSource)
+		public EventSubscriptionsViewer(object eventSource)
 		{
 			_eventSource = eventSource;
 		}

@@ -50,7 +50,7 @@
     <Compile Include="Dependencies\DependencyDomain.cs" />
     <Compile Include="Dependencies\DependencyObject.cs" />
     <Compile Include="EventSubscriptions\EventInformation.cs" />
-    <Compile Include="EventSubscriptions\EventSubscriptionsManager.cs" />
+    <Compile Include="EventSubscriptions\EventSubscriptionsViewer.cs" />
     <Compile Include="EventSubscriptions\Subscription.cs" />
     <Compile Include="ExtensionProperties\Exceptions\ExtensionPropertyNotSupported.cs" />
     <Compile Include="ExtensionProperties\ExtensionMethods.cs" />

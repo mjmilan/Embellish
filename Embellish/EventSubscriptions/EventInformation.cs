@@ -52,7 +52,7 @@ namespace Embellish.EventSubscriptions
 				
 				foreach (var d in delegates)
 				{
-					var s = new Subscription(d);
+					var s = new Subscription(d, _eventHandler);
 					result.Add(s);
 				}
 				

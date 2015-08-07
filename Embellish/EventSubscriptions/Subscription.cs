@@ -10,6 +10,8 @@ namespace Embellish.EventSubscriptions
 	{
 		#region Members
 		protected Delegate _delegate;
+		protected EventHandler _eventHandler;
+		
 		#endregion
 		
 		#region Properties
@@ -42,9 +44,10 @@ namespace Embellish.EventSubscriptions
 		
 		
 		#region Constructor
-		public Subscription(Delegate d)
+		public Subscription(Delegate d, EventHandler eh)
 		{
 			_delegate = d;
+			_eventHandler = eh;
 		}
 		#endregion
 		

@@ -19,7 +19,7 @@ namespace Embellish.Tests
 			objWithEvents.SomethingHappened += EventHandler2;
 
 			// Act
-			var manager = new Embellish.EventSubscriptions.EventSubscriptionsManager(objWithEvents);
+			var manager = new Embellish.EventSubscriptions.EventSubscriptionsViewer(objWithEvents);
 			
 			// Assert
 			Assert.That(manager.Events.Count, Is.EqualTo(1));
@@ -35,7 +35,7 @@ namespace Embellish.Tests
 			objWithEvents.SomethingHappened += EventHandler2;
 
 			// Act
-			var manager = new Embellish.EventSubscriptions.EventSubscriptionsManager(objWithEvents);
+			var manager = new Embellish.EventSubscriptions.EventSubscriptionsViewer(objWithEvents);
 			var eventInfo = manager.GetEventInformationForNamedEvent("SomethingHappened");
 			var subscribers = eventInfo.SubscriptionList;
 			
@@ -54,7 +54,7 @@ namespace Embellish.Tests
 			objWithEvents.SomethingHappened += EventHandler2;
 
 			// Act
-			var manager = new Embellish.EventSubscriptions.EventSubscriptionsManager(objWithEvents);
+			var manager = new Embellish.EventSubscriptions.EventSubscriptionsViewer(objWithEvents);
 			
 			var eventInformation = manager.GetEventInformationForNamedEvent("A Load Of Tosh");
 			
