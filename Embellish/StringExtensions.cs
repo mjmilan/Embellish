@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text.RegularExpressions;
 
 namespace Embellish
 {
@@ -18,6 +19,19 @@ namespace Embellish
 			{
 				return input.Substring(0, size);
 			}
+			
+		}
+		
+		public static bool ContainsWord(this string input, string word)
+		{
+			var multipleWords = Regex.Matches(word, "\\b").Count > 2;
+			if (multipleWords)
+			{
+				throw new ArgumentException("You have tried to test against more than one word");
+			}
+			
+			var result = Regex.IsMatch(input, "\\b" + Regex.Escape(word) + "\\b");
+			return result;
 			
 		}
 	}
